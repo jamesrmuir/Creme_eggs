@@ -39,7 +39,7 @@ while not crashed:
         if event.type == pygame.QUIT:
             crashed = True
 
-        #Key Input
+        #Key Input  
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_LEFT:
                 x_change = -5
