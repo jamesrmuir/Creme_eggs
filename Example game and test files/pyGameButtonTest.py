@@ -3,10 +3,10 @@ import pygame
 import time
 import random
 
-#Initalises pygame
+#Initalise pygame
 pygame.init()
 
-#Sets the height and width of the display
+#Sets the game display's width height  
 display_width = 800
 display_height = 600
 
@@ -14,222 +14,158 @@ display_height = 600
 black        = (  0,  0,  0)
 white        = (255,255,255)
 red          = (255,  0,  0)
-block_colour = ( 53,115,255)
 green        = (  0,200,  0)
+block_colour = ( 53,115,255)
 bright_red   = (255,  0,  0)
 bright_green = (  0,255,  0)
 
-#Sets the width of the car
+#Sets the car width
 car_width = 73
-
-#Sets up the display and its title
+ 
 gameDisplay = pygame.display.set_mode((display_width,display_height))
-pygame.display.set_caption("Menu Test")
-
-#Sets up the clock
+pygame.display.set_caption('A bit Racey')
 clock = pygame.time.Clock()
-
-#Loads assets
-carImg = pygame.image.load("Images/racecar.png")
-
-#Displays amount of images dodged
+ 
+carImg = pygame.image.load('Images/racecar.png')
+ 
+ 
 def things_dodged(count):
-    font = pygame.font.SusFont(None,25)
+    font = pygame.font.SysFont(None, 25)
     text = font.render("Dodged: "+str(count), True, black)
     gameDisplay.blit(text,(0,0))
-
-#Things
-def things(thingx, thingy, thingw, thingh, colour):
-    pygame.draw.rect(gameDisplay, colour, [thingx, thingy, thingw, thingh])
-
-#Function thats used to create the car
+ 
+def things(thingx, thingy, thingw, thingh, color):
+    pygame.draw.rect(gameDisplay, color, [thingx, thingy, thingw, thingh])
+ 
 def car(x,y):
     gameDisplay.blit(carImg,(x,y))
-
-#Text objects
+ 
 def text_objects(text, font):
     textSurface = font.render(text, True, black)
     return textSurface, textSurface.get_rect()
-
-#Message display
+ 
 def message_display(text):
-    largeText = pygame.font.Font("fresansbold.ttf", 115)
+    largeText = pygame.font.Font('freesansbold.ttf',115)
     TextSurf, TextRect = text_objects(text, largeText)
     TextRect.center = ((display_width/2),(display_height/2))
     gameDisplay.blit(TextSurf, TextRect)
-
-    #Updates display
+ 
     pygame.display.update()
-
-    #Sleeps for two seconds
+ 
     time.sleep(2)
-
-    #Calls game loop
+ 
     game_loop()
+    
+def button(msg,x,y,w,h,ic,ac,action=None):
+    mouse = pygame.mouse.get_pos()
+    click = pygame.mouse.get_pressed()
+    print(click)
+    if x+w > mouse[0] > x and y+h > mouse[1] > y:
+        pygame.draw.rect(gameDisplay, ac,(x,y,w,h))
 
-#Displays crashed message
+        if click[0] == 1 and action != None:
+            action()         
+    else:
+        pygame.draw.rect(gameDisplay, ic,(x,y,w,h))
+
+    smallText = pygame.font.SysFont("comicsansms",20)
+    textSurf, textRect = text_objects(msg, smallText)
+    textRect.center = ( (x+(w/2)), (y+(h/2)) )
+    gameDisplay.blit(textSurf, textRect)    
+ 
 def crash():
-    message_display("You crashed")
+    message_display('You Crashed')
 
-#Game intro
 def game_intro():
-    #Declares intro
+
     intro = True
 
-    #While loop
     while intro:
         for event in pygame.event.get():
-            print(event)
+            #print(event)
             if event.type == pygame.QUIT:
                 pygame.quit()
                 quit()
-
-        gameDisplay.fill(white) #Sets background white
-
-        #Defines text font and size
-        largeText = pygame.font.Font("freesansbold.ttf", 115)
-        smallText = pygame.font.Font("freesansbold.ttf", 20)
-        
-        TextSurf, TextRect = text_objects("Menu Test", largeText)
+                
+        gameDisplay.fill(white)
+        largeText = pygame.font.SysFont("comicsansms",115)
+        TextSurf, TextRect = text_objects("A bit Racey", largeText)
         TextRect.center = ((display_width/2),(display_height/2))
         gameDisplay.blit(TextSurf, TextRect)
 
-        #Defines mouse
-        mouse = pygame.mouse.get_pos()
+        button("GO!",150,450,100,50,green,bright_green,game_loop)
+        button("Quit",550,450,100,50,red,bright_red,quitgame)
 
-        #If the mouse is over the rectangle draw it light green, else draw it green
-        if 150+100 > mouse[0] > 150 and 450+50 > mouse[1] > 450:
-            pygame.draw.rect(gameDisplay, bright_green,(150,450,100,50))
-        else:
-            pygame.draw.rect(gameDisplay, green,(150,450,100,50))
-    
-        #Displays text on green triangle
-        textSurf, textRect = text_objects("GO!", smallText)
-        textRect.center = ((150+(100/2)), (450+(50/2)))
-        gameDisplay.blit(textSurf, textRect)
-        
-        #Draws a red rectangle
-        pygame.draw.rect(gameDisplay, red,(550,450,100,50))
-
-        #Updates the display        
         pygame.display.update()
         clock.tick(15)
-
-#Main game loop
+        
 def game_loop():
-    x = (display_width * 0.45)  
+    x = (display_width * 0.45)
     y = (display_height * 0.8)
-
+ 
     x_change = 0
-
+ 
     thing_startx = random.randrange(0, display_width)
     thing_starty = -600
     thing_speed = 4
     thing_width = 100
     thing_height = 100
-
+ 
     thingCount = 1
-
+ 
     dodged = 0
-
+ 
     gameExit = False
-
+ 
     while not gameExit:
+ 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
                 quit()
-
-            #Checks for key presses
+ 
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_LEFT:
                     x_change = -5
-                if event.type == pygame.K_RIGHT:
+                if event.key == pygame.K_RIGHT:
                     x_change = 5
-
-            #Checks for key releases
+ 
             if event.type == pygame.KEYUP:
-                if event.key == pygame.L_LEFT or event.key == pygame.K_RIGHT:
+                if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT:
                     x_change = 0
-
-        #Changes x
+ 
         x += x_change
-
-        #Sets display to white
         gameDisplay.fill(white)
-
-        #Calls things and passes things to it
-        things(thing_startx, thing_starty, thing_width, thing_height, block_colour)            
-
+ 
+        things(thing_startx, thing_starty, thing_width, thing_height, block_colour)
+ 
+ 
+        
         thing_starty += thing_speed
-
-        #Calls car and things_dodged
         car(x,y)
         things_dodged(dodged)
-
+ 
         if x > display_width - car_width or x < 0:
             crash()
-
+ 
         if thing_starty > display_height:
             thing_starty = 0 - thing_height
-            thing_startx = random.randrange(0, display_width)
+            thing_startx = random.randrange(0,display_width)
             dodged += 1
             thing_speed += 1
             thing_width += (dodged * 1.2)
-
-        if y < thing_starty + thing_height:
-            print("y crossover")
-
+ 
+        if y < thing_starty+thing_height:
+            print('y crossover')
+ 
             if x > thing_startx and x < thing_startx + thing_width or x+car_width > thing_startx and x + car_width < thing_startx+thing_width:
                 print('x crossover')
                 crash()
-
-        #Updates the display
+        
         pygame.display.update()
         clock.tick(60)
-            
-#Calls game
+
 game_intro()
 game_loop()
-
-#Quits the game
 pygame.quit()
 quit()
-            
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
