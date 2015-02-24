@@ -10,7 +10,9 @@ targetPort = 5005
 #Defines data to send
 message = "170900170900"
 
-#Sends the data
+#Sets up the socket
 sock = socket.socket(socket.AF_INET, # Internet
                      socket.SOCK_DGRAM) #Udp
-sock.sendto(message, (targetIP, targetPort))
+
+#Sends the data
+sock.sendto(bytes(message, "utf-8"), (targetIP, targetPort))
