@@ -1,19 +1,7 @@
 #Imports modules=================================================================================================#
 import pygame
-import socket
 
 #Functions=======================================================================================================#
-#Gets Pi's ip address
-def getIP():
-    global playersIp
-    localIP = socket.gethostbyname(socket.gethostname())
-    
-    return localIP
-
-def findIPS():
-    global playersIp
-    
-    playersIp = []
 
 #Declaring variables=============================================================================================#
 #Sets variable 
