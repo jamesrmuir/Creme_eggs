@@ -1,24 +1,20 @@
-#Imports modules=================================================================================================#
-import pygame
+#Metadata======================================================================#
+__author__ = "James"
+#Import========================================================================#
+from tkinter import *
+import commonVariables
 
-#Functions=======================================================================================================#
+#Functions=====================================================================#
+def main():
+    #Sets TK window
+    mainWindow = Tk()
 
-#Declaring variables=============================================================================================#
-#Sets variable 
-display_width = 800
-display_height  = 600
+    #Title
+    title = Label(mainWindow, text="Main Menu")
+    title.grid(row=0, column=0)
 
-#Defines colours
-black = (  0,  0,  0)
-white = (255,255,255)
+    #Changes the resolution
+    changeResolution = Button(mainWindow, text="Change Resolution")
 
-#Main program====================================================================================================#
-#Initalise pygame
-pygame.init()
-
-#Sets up the display and its title
-gameDisplay = pygame.display.set_mode((display_width, display_height))
-
-#Sets clock
-clock = pygame.time.Clock()
-
+#Program=======================================================================#
+main()
