@@ -30,13 +30,18 @@ def menu():
         #Sets screen to white
         gameDisplay.fill(grey)
 
-        #Defines text
+        #Defines text sizes
         largeText = pygame.font.Font("freesansbold.ttf", 115)
-        TextSurf, TextRect = textObjects("Menu", largeText)
+        smallText = pygame.font.Font("freesansbold.ttf",  20)
+        
+        #Displays menu
+        TextSurf, TextRect = textObjectsYellow("Menu", largeText)
+
+        
         TextRect.center = ((commonVariables.displayWidth/2),(commonVariables.displayHeight/2))
         gameDisplay.blit(TextSurf, TextRect)
-
-
+        
+        #Gets mouse position
         mouse = pygame.mouse.get_pos()
 
         #print(mouse)
@@ -47,13 +52,32 @@ def menu():
         else:
             pygame.draw.rect(gameDisplay, yellow,(150,450,100,50))
 
+        #Button One Text
+        textSurf, textRect = textObjectsGrey("Resolution", smallText)
+        textRect.center = ( (150+(100/2)), (450+(50/2)) )
+        gameDisplay.blit(textSurf, textRect)
+        
         #Button Two    
-        pygame.draw.rect(gameDisplay, yellow,(550,450,100,50))
+        if 550+100 > mouse[0] > 550 and 450+50 > mouse[1] > 450: 
+            pygame.draw.rect(gameDisplay, brightYellow,(550,450,100,50))
+        else:
+            pygame.draw.rect(gameDisplay, yellow,(550,450,100,50))
+        
+        #Button TwoText
+        textSurf, textRect = textObjectsGrey("Sound", smallText)
+        textRect.center = ( (550+(100/2)), (450+(50/2)) )
+        gameDisplay.blit(textSurf, textRect)        
+        
+        #Update display
         pygame.display.update()
         clock.tick(15)
 
-def textObjects(text, font):
+def textObjectsYellow(text, font):
     textSurface = font.render(text, True, yellow)
+    return textSurface, textSurface.get_rect()
+
+def textObjectsGrey(text, font):
+    textSurface = font.render(text, True, grey)
     return textSurface, textSurface.get_rect()
  
 def message_display(text):
