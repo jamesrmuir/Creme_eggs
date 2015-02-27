@@ -9,15 +9,18 @@ black        = (  0,  0,  0)
 white        = (255,255,255)
 red          = (200,  0,  0)
 green        = (  0,200,  0)
-bright_red   = (255,  0,  0)
-bright_green = (0  ,255,  0)
+brightRed   = (255,  0,  0)
+brightGreen = (0  ,255,  0)
+grey         = (135,139,140)
+yellow       = (198,217, 30)
+brightYellow = (233,255, 36)
 
 #Functions=====================================================================#
 def menu():
     
-    intro = True
+    menuLoop = True
 
-    while intro:
+    while menuLoop:
         #Allows the player to quit
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -25,7 +28,7 @@ def menu():
                 quit()
 
         #Sets screen to white
-        gameDisplay.fill(white)
+        gameDisplay.fill(grey)
 
         #Defines text
         largeText = pygame.font.Font("freesansbold.ttf", 115)
@@ -38,16 +41,19 @@ def menu():
 
         #print(mouse)
 
+        #Button One
         if 150+100 > mouse[0] > 150 and 450+50 > mouse[1] > 450:
-            pygame.draw.rect(gameDisplay, bright_green,(150,450,100,50))
+            pygame.draw.rect(gameDisplay, brightYellow,(150,450,100,50))
         else:
-            pygame.draw.rect(gameDisplay, green,(150,450,100,50))
-        pygame.draw.rect(gameDisplay, red,(550,450,100,50))
+            pygame.draw.rect(gameDisplay, yellow,(150,450,100,50))
+
+        #Button Two    
+        pygame.draw.rect(gameDisplay, yellow,(550,450,100,50))
         pygame.display.update()
         clock.tick(15)
 
 def textObjects(text, font):
-    textSurface = font.render(text, True, black)
+    textSurface = font.render(text, True, yellow)
     return textSurface, textSurface.get_rect()
  
 def message_display(text):
