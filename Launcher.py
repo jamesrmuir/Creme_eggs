@@ -1,10 +1,12 @@
 #Metadata======================================================================#
 __author__ = "James"
-#Import========================================================================#
+#Imports modules===============================================================#
 import commonVariables
 import pygame
+import socket
 
 #Variables=====================================================================#
+#Defines colour
 black        = (  0,  0,  0)
 white        = (255,255,255)
 red          = (200,  0,  0)
@@ -14,6 +16,9 @@ brightGreen  = (0  ,255,  0)
 grey         = (135,139,140)
 yellow       = (198,217, 30)
 brightYellow = (233,255, 36)
+
+#Defines user Ip
+userIp = socket.gethostbyname(socket.gethostname())
 
 #Functions=====================================================================#
 #Creates yellow text
@@ -27,7 +32,7 @@ def textObjectsGrey(text, font):
     return textSurface, textSurface.get_rect()
 
 #Button function that creates buttons
-def button(msg,x,y,w,h,ic,ac,action=None):
+def button(msg,x,y,w,h,ic,ac,textObjects,action=None):
     
     mouse = pygame.mouse.get_pos()
     click = pygame.mouse.get_pressed()
@@ -41,10 +46,11 @@ def button(msg,x,y,w,h,ic,ac,action=None):
         pygame.draw.rect(gameDisplay, ic,(x,y,w,h))
 
     smallText = pygame.font.SysFont("freesansbold.ttf",22)    
-    textSurf, textRect = textObjectsGrey(msg, smallText)
+    textSurf, textRect = textObjects(msg, smallText)
     textRect.center = ( (x+(w/2)), (y+(h/2)) )
     gameDisplay.blit(textSurf, textRect)
-    
+
+#Gets the user's ip
 def mainMenu():
     
     menuLoop = True
@@ -63,24 +69,28 @@ def mainMenu():
         largeText = pygame.font.Font("freesansbold.ttf", 115)
         smallText = pygame.font.Font("freesansbold.ttf",  20)
         
-        #Displays menu
-        TextSurf, TextRect = textObjectsYellow("Menu", largeText)
-
-        
-        TextRect.center = ((commonVariables.displayWidth/2),(commonVariables.displayHeight/2))
+        #Displays title
+        TextSurf, TextRect = textObjectsYellow("Project Pithon", largeText)
+        TextRect.center = ((commonVariables.displayWidth/2),(commonVariables.displayHeight/5))
         gameDisplay.blit(TextSurf, TextRect)
         
         #Gets mouse position
         mouse = pygame.mouse.get_pos()
 
         #Button One
-        button("Gamemode",150,450,100,50,yellow,brightYellow,testFunction)
+        button("Gamemode",150,450,100,50,yellow,brightYellow,textObjectsGrey,testFunction)
         
         #Button Two
-        button("Graphics",350,450,100,50,yellow,brightYellow,testFunction)
+        button("Graphics",350,450,100,50,yellow,brightYellow,textObjectsGrey,testFunction)
         
         #Button Three    
-        button("Sound",550,450,100,50,yellow,brightYellow,testFunction)        
+        button("Sound",550,450,100,50,yellow,brightYellow,textObjectsGrey,testFunction)
+
+        #IP Display
+        button(userIp,700,550,100,50,grey,grey,textObjectsYellow,testFunction)
+
+        #Version display
+        button("V0.5 Pre Alpha",5,550,100,50,grey,grey,textObjectsYellow,testFunction)       
         
         #Update display
         pygame.display.update()
@@ -95,8 +105,8 @@ pygame.init()
 
 gameDisplay = pygame.display.set_mode((commonVariables.displayWidth
                                        ,commonVariables.displayHeight))
-pygame.display.set_caption("Menu")
+pygame.display.set_caption("Launcher")
 clock = pygame.time.Clock()
 
-#Calls variable
+#Calls functions
 mainMenu()
