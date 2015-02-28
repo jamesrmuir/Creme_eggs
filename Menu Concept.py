@@ -1,4 +1,6 @@
-from tkinter import *
+from tkinter import *  #---Imports tkinter for use---#
+
+#---Defines the button commands and launches a message box where, in the final game, the program would be imported and run. On the quit command, it quits the menu---#
 
 def Start():
     messagebox.showinfo(title="Creme Eggs Game",message="The game will now launch...")
@@ -14,14 +16,18 @@ def Quit():
 
     
 
-
+#---Launches the windows and sets the size to 800x600---#
 
 mainWindow = Tk()
 mainWindow.title("Creme Eggs Menu")
 mainWindow.minsize(width=800,height=600)
 
+#---Creates title--#
+
 menuTitle = Label(mainWindow, text="Creme Eggs Game Menu", font=('arial',40, 'bold'))
 menuTitle.pack()
+
+#---Creates buttons---#
 
 butStart = Button(mainWindow, text="Start",command=Start, height=5, width=50)
 butStart.pack()
