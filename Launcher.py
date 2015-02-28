@@ -9,33 +9,24 @@ black        = (  0,  0,  0)
 white        = (255,255,255)
 red          = (200,  0,  0)
 green        = (  0,200,  0)
-brightRed   = (255,  0,  0)
-brightGreen = (0  ,255,  0)
+brightRed    = (255,  0,  0)
+brightGreen  = (0  ,255,  0)
 grey         = (135,139,140)
 yellow       = (198,217, 30)
 brightYellow = (233,255, 36)
 
 #Functions=====================================================================#
+#Creates yellow text
 def textObjectsYellow(text, font):
     textSurface = font.render(text, True, yellow)
     return textSurface, textSurface.get_rect()
 
+#Creates grey text
 def textObjectsGrey(text, font):
     textSurface = font.render(text, True, grey)
     return textSurface, textSurface.get_rect()
- 
-def message_display(text):
-    largeText = pygame.font.Font('freesansbold.ttf',115)
-    TextSurf, TextRect = text_objects(text, largeText)
-    TextRect.center = ((display_width/2),(display_height/2))
-    gameDisplay.blit(TextSurf, TextRect)
- 
-    pygame.display.update()
- 
-    time.sleep(2)
- 
-    game_loop()
 
+#Button function that creates buttons
 def button(msg,x,y,w,h,ic,ac,action=None):
     
     mouse = pygame.mouse.get_pos()
@@ -49,12 +40,12 @@ def button(msg,x,y,w,h,ic,ac,action=None):
     else:
         pygame.draw.rect(gameDisplay, ic,(x,y,w,h))
 
-    smallText = pygame.font.SysFont("comicsansms",20)    
+    smallText = pygame.font.SysFont("freesansbold.ttf",22)    
     textSurf, textRect = textObjectsGrey(msg, smallText)
     textRect.center = ( (x+(w/2)), (y+(h/2)) )
     gameDisplay.blit(textSurf, textRect)
     
-def menu():
+def mainMenu():
     
     menuLoop = True
 
@@ -108,4 +99,4 @@ pygame.display.set_caption("Menu")
 clock = pygame.time.Clock()
 
 #Calls variable
-menu()
+mainMenu()
