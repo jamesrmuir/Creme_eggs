@@ -48,9 +48,9 @@ def button(msg,x,y,w,h,ic,ac,action=None):
             action()         
     else:
         pygame.draw.rect(gameDisplay, ic,(x,y,w,h))
-    
-    #smallText = pygame.font.SysFont("comicsansms",20)
-    textSurf, textRect = text_objects(msg, smallText)
+
+    smallText = pygame.font.SysFont("comicsansms",20)    
+    textSurf, textRect = textObjectsGrey(msg, smallText)
     textRect.center = ( (x+(w/2)), (y+(h/2)) )
     gameDisplay.blit(textSurf, textRect)
     
@@ -82,44 +82,21 @@ def menu():
         #Gets mouse position
         mouse = pygame.mouse.get_pos()
 
-        #print(mouse)
-
         #Button One
-        if 150+100 > mouse[0] > 150 and 450+50 > mouse[1] > 450:
-            pygame.draw.rect(gameDisplay, brightYellow,(150,450,100,50))
-        else:
-            pygame.draw.rect(gameDisplay, yellow,(150,450,100,50))
-
-        #Button One Text
-        textSurf, textRect = textObjectsGrey("Resolution", smallText)
-        textRect.center = ( (150+(100/2)), (450+(50/2)) )
-        gameDisplay.blit(textSurf, textRect)
-
+        button("Gamemode",150,450,100,50,yellow,brightYellow,testFunction)
+        
         #Button Two
-        if 350+100 > mouse[0] > 350 and 450+50 > mouse[1] > 450:
-            pygame.draw.rect(gameDisplay, brightYellow,(350,450,100,50)) #surface colour (left, top, width, height)
-        else:
-            pygame.draw.rect(gameDisplay, yellow,(350,450,100,50))
-
-        #Button Two Text
-        textSurf, textRect = textObjectsGrey("Gamemode", smallText)
-        textRect.center = ( (350+(100/2)), (450+(50/2)) )
-        gameDisplay.blit(textSurf, textRect)
+        button("Graphics",350,450,100,50,yellow,brightYellow,testFunction)
         
         #Button Three    
-        if 550+100 > mouse[0] > 550 and 450+50 > mouse[1] > 450: 
-            pygame.draw.rect(gameDisplay, brightYellow,(550,450,100,50))
-        else:
-            pygame.draw.rect(gameDisplay, yellow,(550,450,100,50))
-        
-        #Button Three Text
-        textSurf, textRect = textObjectsGrey("Sound", smallText)
-        textRect.center = ( (550+(100/2)), (450+(50/2)) )
-        gameDisplay.blit(textSurf, textRect)        
+        button("Sound",550,450,100,50,yellow,brightYellow,testFunction)        
         
         #Update display
         pygame.display.update()
         clock.tick(15)
+
+def testFunction():
+    print("Test")
     
 #Program=======================================================================#
 #Initalise pygame
