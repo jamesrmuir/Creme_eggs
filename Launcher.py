@@ -92,7 +92,7 @@ def mainMenu():
         button("Graphics",350,450,100,50,yellow,brightYellow,textObjectsGrey,graphics)
         
         #Button Three    
-        button("Sound",550,450,100,50,yellow,brightYellow,textObjectsGrey,testFunction)
+        button("Sound",550,450,100,50,yellow,brightYellow,textObjectsGrey,sound)
 
         #IP Display
         button(userIp,700,550,100,50,grey,grey,textObjectsYellow,testFunction)
@@ -106,8 +106,62 @@ def mainMenu():
 
 #Called when button one (gamemode) is pressed----------------------------------#
 def gamemode():
-    gamemodeLoop = True
+    global menuLoop
+    
+    menuLoop = False
+    menuLoop = True
+    
+    while menuLoop:
+        #Allows the player to quit
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                quit()
 
+        #Sets screen to white
+        gameDisplay.fill(grey)
+
+        #Defines text sizes
+        largeText = pygame.font.Font("freesansbold.ttf", 115)
+        mediumText = pygame.font.Font("freesansbold.ttf", 50)
+        smallText = pygame.font.Font("freesansbold.ttf",  20)
+        
+        #Displays title
+        TextSurf, TextRect = textObjectsYellow("Graphics menu", mediumText)
+        TextRect.center = ((400),(85)) 
+        gameDisplay.blit(TextSurf, TextRect)
+        
+        #Gets mouse position
+        mouse = pygame.mouse.get_pos()
+
+        #Minus button
+        button("-",50,250,100,50,yellow,brightYellow,textObjectsGrey,testFunction)
+        
+        #Percentage display
+        button("",200,263,commonVariables.graphicsBarOne,25,yellow,yellow,textObjectsGrey,testFunction)        
+
+        #Plus button
+        button("+",650,250,100,50,yellow,brightYellow,textObjectsGrey,testFunction)
+        
+        #Button One
+        #button("Gamemode",150,450,100,50,yellow,brightYellow,textObjectsGrey,gamemode)
+        
+        #Button Two (Back)
+        button("Back",350,450,100,50,yellow,brightYellow,textObjectsGrey,mainMenu)
+        
+        #Button Three    
+        #button("Sound",550,450,100,50,yellow,brightYellow,textObjectsGrey,testFunction)
+  
+        #IP Display
+        button(userIp,700,550,100,50,grey,grey,textObjectsYellow,testFunction)
+
+        #Version display
+        button("V0.5 Pre Alpha",5,550,100,50,grey,grey,textObjectsYellow,testFunction)       
+        
+        #Update display
+        pygame.display.update()
+        clock.tick(15)
+        
 #Called when button two (Resolution) is pressed--------------------------------#
 def graphics():
     global menuLoop
