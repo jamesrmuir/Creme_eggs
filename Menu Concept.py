@@ -16,6 +16,9 @@ def Profile():
 def Settings():
     messagebox.showinfo(title="Pi Thon Settings",message="The settings menu will now launch...")
 
+def New():
+    messagebox.showinfo(title="Pi Thon New Features",message="Added the New Features section, added user IP to the Launcher, added version number to the Launcher.")
+
 def Quit():
     quit()
 
@@ -35,7 +38,7 @@ menuTitle.pack()
 ipLabel = Label(mainWindow, text=playerIp, font=('arial',10, 'bold'))
 ipLabel.pack()
 
-versionLabel = Label(mainWindow,text="Launcher 0.2 Concept", font=('arial',10, 'bold'))
+versionLabel = Label(mainWindow,text="Launcher 0.3 Concept", font=('arial',10, 'bold'))
 versionLabel.pack()
 
 #---Creates buttons---#
@@ -48,6 +51,9 @@ butProfile.pack()
 
 butSettings = Button(mainWindow, text="Settings Menu",command=Settings, height=5, width=50)
 butSettings.pack()
+
+butNew = Button(mainWindow, text="What's new?",command=New, height=5, width=50)
+butNew.pack()
 
 butQuit = Button(mainWindow, text="Quit",command=Quit, height=5, width=50)
 butQuit.pack()
