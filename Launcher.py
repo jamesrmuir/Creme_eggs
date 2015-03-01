@@ -20,18 +20,20 @@ brightYellow = (233,255, 36)
 #Defines user Ip
 userIp = socket.gethostbyname(socket.gethostname())
 
+#Defines variable for the loop in mainMenu
+menuLoop = True
 #Functions=====================================================================#
-#Creates yellow text
+#Creates yellow text-----------------------------------------------------------#
 def textObjectsYellow(text, font):
     textSurface = font.render(text, True, yellow)
     return textSurface, textSurface.get_rect()
 
-#Creates grey text
+#Creates grey text-------------------------------------------------------------#
 def textObjectsGrey(text, font):
     textSurface = font.render(text, True, grey)
     return textSurface, textSurface.get_rect()
 
-#Button function that creates buttons
+#Button function that creates buttons------------------------------------------#
 def button(msg,x,y,w,h,ic,ac,textObjects,action=None):
     
     mouse = pygame.mouse.get_pos()
@@ -50,9 +52,15 @@ def button(msg,x,y,w,h,ic,ac,textObjects,action=None):
     textRect.center = ( (x+(w/2)), (y+(h/2)) )
     gameDisplay.blit(textSurf, textRect)
 
-#Gets the user's ip
+#Used to test things and as a placer-------------------------------------------#
+def testFunction():
+    print("Test")
+
+#The main menu-----------------------------------------------------------------#
 def mainMenu():
+    global menuLoop
     
+    menuLoop = False
     menuLoop = True
 
     while menuLoop:
@@ -78,10 +86,10 @@ def mainMenu():
         mouse = pygame.mouse.get_pos()
 
         #Button One
-        button("Gamemode",150,450,100,50,yellow,brightYellow,textObjectsGrey,testFunction)
+        button("Gamemode",150,450,100,50,yellow,brightYellow,textObjectsGrey,gamemode)
         
         #Button Two
-        button("Graphics",350,450,100,50,yellow,brightYellow,textObjectsGrey,testFunction)
+        button("Graphics",350,450,100,50,yellow,brightYellow,textObjectsGrey,graphics)
         
         #Button Three    
         button("Sound",550,450,100,50,yellow,brightYellow,textObjectsGrey,testFunction)
@@ -96,11 +104,132 @@ def mainMenu():
         pygame.display.update()
         clock.tick(15)
 
-def testFunction():
-    print("Test")
+#Called when button one (gamemode) is pressed----------------------------------#
+def gamemode():
+    gamemodeLoop = True
+
+#Called when button two (Resolution) is pressed--------------------------------#
+def graphics():
+    global menuLoop
     
+    menuLoop = False
+    menuLoop = True
+    
+    while menuLoop:
+        #Allows the player to quit
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                quit()
+
+        #Sets screen to white
+        gameDisplay.fill(grey)
+
+        #Defines text sizes
+        largeText = pygame.font.Font("freesansbold.ttf", 115)
+        mediumText = pygame.font.Font("freesansbold.ttf", 50)
+        smallText = pygame.font.Font("freesansbold.ttf",  20)
+        
+        #Displays title
+        TextSurf, TextRect = textObjectsYellow("Graphics menu", mediumText)
+        TextRect.center = ((400),(85)) 
+        gameDisplay.blit(TextSurf, TextRect)
+        
+        #Gets mouse position
+        mouse = pygame.mouse.get_pos()
+
+        #Minus button
+        button("-",50,250,100,50,yellow,brightYellow,textObjectsGrey,testFunction)
+        
+        #Percentage display
+        button("",200,263,commonVariables.graphicsBarOne,25,yellow,yellow,textObjectsGrey,testFunction)        
+
+        #Plus button
+        button("+",650,250,100,50,yellow,brightYellow,textObjectsGrey,testFunction)
+        
+        #Button One
+        #button("Gamemode",150,450,100,50,yellow,brightYellow,textObjectsGrey,gamemode)
+        
+        #Button Two (Back)
+        button("Back",350,450,100,50,yellow,brightYellow,textObjectsGrey,mainMenu)
+        
+        #Button Three    
+        #button("Sound",550,450,100,50,yellow,brightYellow,textObjectsGrey,testFunction)
+  
+        #IP Display
+        button(userIp,700,550,100,50,grey,grey,textObjectsYellow,testFunction)
+
+        #Version display
+        button("V0.5 Pre Alpha",5,550,100,50,grey,grey,textObjectsYellow,testFunction)       
+        
+        #Update display
+        pygame.display.update()
+        clock.tick(15)
+        
+#Sound-------------------------------------------------------------------------#
+def sound():
+    global menuLoop
+    
+    menuLoop = False
+    menuLoop = True
+    
+    while menuLoop:
+        #Allows the player to quit
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                quit()
+
+        #Sets screen to white
+        gameDisplay.fill(grey)
+
+        #Defines text sizes
+        largeText = pygame.font.Font("freesansbold.ttf", 115)
+        mediumText = pygame.font.Font("freesansbold.ttf", 50)
+        smallText = pygame.font.Font("freesansbold.ttf",  20)
+        
+        #Displays title
+        TextSurf, TextRect = textObjectsYellow("Graphics menu", mediumText)
+        TextRect.center = ((400),(85)) 
+        gameDisplay.blit(TextSurf, TextRect)
+        
+        #Gets mouse position
+        mouse = pygame.mouse.get_pos()
+
+        #Minus button
+        button("-",50,250,100,50,yellow,brightYellow,textObjectsGrey,testFunction)
+        
+        #Percentage display
+        button("",200,263,400,25,yellow,yellow,textObjectsGrey,testFunction)        
+
+        #Plus button
+        button("+",650,250,100,50,yellow,brightYellow,textObjectsGrey,testFunction)
+        
+        #Button One
+        #button("Gamemode",150,450,100,50,yellow,brightYellow,textObjectsGrey,gamemode)
+        
+        #Button Two (Back)
+        button("Back",350,450,100,50,yellow,brightYellow,textObjectsGrey,mainMenu)
+        
+        #Button Three    
+        #button("Sound",550,450,100,50,yellow,brightYellow,textObjectsGrey,testFunction)
+  
+        #IP Display
+        button(userIp,700,550,100,50,grey,grey,textObjectsYellow,testFunction)
+
+        #Version display
+        button("V0.5 Pre Alpha",5,550,100,50,grey,grey,textObjectsYellow,testFunction)       
+        
+        #Update display
+        pygame.display.update()
+        clock.tick(15)
+    
+
 #Program=======================================================================#
-#Initalise pygame
+#Loads variables---------------------------------------------------------------#
+commonVariables.load()
+
+#Initalise pygame--------------------------------------------------------------#
 pygame.init()
 
 gameDisplay = pygame.display.set_mode((commonVariables.displayWidth
@@ -108,5 +237,27 @@ gameDisplay = pygame.display.set_mode((commonVariables.displayWidth
 pygame.display.set_caption("Launcher")
 clock = pygame.time.Clock()
 
-#Calls functions
+#Launches the program----------------------------------------------------------#
 mainMenu()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
