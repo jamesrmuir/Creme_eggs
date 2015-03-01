@@ -17,7 +17,7 @@ def Settings():
     messagebox.showinfo(title="Pi Thon Settings",message="The settings menu will now launch...")
 
 def New():
-    messagebox.showinfo(title="Pi Thon New Features",message="Added colours to the launcher, added the New Features section, added user IP to the Launcher, added version number to the Launcher.")
+    messagebox.showinfo(title="Pi Thon New Features",message="Changed the font to Times New Roman and changed the size, added colours to the launcher, added the New Features section, added user IP to the Launcher, added version number to the Launcher.")
 
 def Quit():
     quit()
@@ -33,13 +33,13 @@ mainWindow.config(bg = "light green")
 
 #---Creates title--#
 
-menuTitle = Label(mainWindow, text="Pi Thon Game Menu", fg = "yellow", bg = "red", font=('arial',40, 'bold'))
+menuTitle = Label(mainWindow, text="Pi Thon Game Menu", fg = "blue", bg = "light green", font=('times',50, 'bold'))
 menuTitle.pack()
 
-ipLabel = Label(mainWindow, text=playerIp, fg = "blue" ,font=('arial',10, 'bold'))
+ipLabel = Label(mainWindow, text=playerIp, fg = "blue", bg = "light green" ,font=('times',15, 'bold'))
 ipLabel.pack()
 
-versionLabel = Label(mainWindow,text="Launcher 0.4 Concept", fg = "blue", font=('arial',10, 'bold'))
+versionLabel = Label(mainWindow,text="Launcher 0.5 Concept", fg = "blue", bg = "light green", font=('times',15, 'bold'))
 versionLabel.pack()
 
 #---Creates buttons---#
