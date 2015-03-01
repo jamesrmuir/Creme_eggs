@@ -17,7 +17,7 @@ def Settings():
     messagebox.showinfo(title="Pi Thon Settings",message="The settings menu will now launch...")
 
 def New():
-    messagebox.showinfo(title="Pi Thon New Features",message="Added the New Features section, added user IP to the Launcher, added version number to the Launcher.")
+    messagebox.showinfo(title="Pi Thon New Features",message="Added colours to the launcher, added the New Features section, added user IP to the Launcher, added version number to the Launcher.")
 
 def Quit():
     quit()
@@ -29,33 +29,34 @@ def Quit():
 mainWindow = Tk()
 mainWindow.title("Pi Thon Menu")
 mainWindow.minsize(width=800,height=600)
+mainWindow.config(bg = "light green")
 
 #---Creates title--#
 
-menuTitle = Label(mainWindow, text="Pi Thon Game Menu", font=('arial',40, 'bold'))
+menuTitle = Label(mainWindow, text="Pi Thon Game Menu", fg = "yellow", bg = "red", font=('arial',40, 'bold'))
 menuTitle.pack()
 
-ipLabel = Label(mainWindow, text=playerIp, font=('arial',10, 'bold'))
+ipLabel = Label(mainWindow, text=playerIp, fg = "blue" ,font=('arial',10, 'bold'))
 ipLabel.pack()
 
-versionLabel = Label(mainWindow,text="Launcher 0.3 Concept", font=('arial',10, 'bold'))
+versionLabel = Label(mainWindow,text="Launcher 0.4 Concept", fg = "blue", font=('arial',10, 'bold'))
 versionLabel.pack()
 
 #---Creates buttons---#
 
-butStart = Button(mainWindow, text="Start",command=Start, height=5, width=50)
+butStart = Button(mainWindow, text="Start",fg = "light green", bg = "dark green",command=Start, height=5, width=50)
 butStart.pack()
 
-butProfile = Button(mainWindow, text="Profile Options",command=Profile, height=5, width=50)
+butProfile = Button(mainWindow, text="Profile Options",fg = "light green", bg = "dark green",command=Profile, height=5, width=50)
 butProfile.pack()
 
-butSettings = Button(mainWindow, text="Settings Menu",command=Settings, height=5, width=50)
+butSettings = Button(mainWindow, text="Settings Menu", fg = "light green", bg = "dark green",command=Settings, height=5, width=50)
 butSettings.pack()
 
-butNew = Button(mainWindow, text="What's new?",command=New, height=5, width=50)
+butNew = Button(mainWindow, text="What's new?",fg = "light green", bg = "dark green",command=New, height=5, width=50)
 butNew.pack()
 
-butQuit = Button(mainWindow, text="Quit",command=Quit, height=5, width=50)
+butQuit = Button(mainWindow, text="Quit", fg = "light green", bg = "dark green",command=Quit, height=5, width=50)
 butQuit.pack()
 
 
