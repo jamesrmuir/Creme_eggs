@@ -1,15 +1,20 @@
 from tkinter import *  #---Imports tkinter for use---#
+import socket #---Imports the socket function for finding the IP---#
+
+
+#---Finds User IP---#
+playerIp = socket.gethostbyname(socket.gethostname())
 
 #---Defines the button commands and launches a message box where, in the final game, the program would be imported and run. On the quit command, it quits the menu---#
 
 def Start():
-    messagebox.showinfo(title="Creme Eggs Game",message="The game will now launch...")
+    messagebox.showinfo(title="Pi Thon Game",message="The game will now launch...")
 
 def Profile():
-    messagebox.showinfo(title="Creme Eggs Profile Settings",message="The Profile Options menu will now launch...")
+    messagebox.showinfo(title="Pi Thon Profile Settings",message="The Profile Options menu will now launch...")
 
 def Settings():
-    messagebox.showinfo(title="Creme Eggs Settings",message="The settings menu will now launch...")
+    messagebox.showinfo(title="Pi Thon Settings",message="The settings menu will now launch...")
 
 def Quit():
     quit()
@@ -19,13 +24,19 @@ def Quit():
 #---Launches the windows and sets the size to 800x600---#
 
 mainWindow = Tk()
-mainWindow.title("Creme Eggs Menu")
+mainWindow.title("Pi Thon Menu")
 mainWindow.minsize(width=800,height=600)
 
 #---Creates title--#
 
-menuTitle = Label(mainWindow, text="Creme Eggs Game Menu", font=('arial',40, 'bold'))
+menuTitle = Label(mainWindow, text="Pi Thon Game Menu", font=('arial',40, 'bold'))
 menuTitle.pack()
+
+ipLabel = Label(mainWindow, text=playerIp, font=('arial',10, 'bold'))
+ipLabel.pack()
+
+versionLabel = Label(mainWindow,text="Launcher 0.2 Concept", font=('arial',10, 'bold'))
+versionLabel.pack()
 
 #---Creates buttons---#
 
