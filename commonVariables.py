@@ -1,27 +1,38 @@
+import pickle
+
+#Default
 def default():
-    file = open("saveGame.txt", "w")
+    global displayWidth, displayHeight, graphicsBarOne
+    displayWidth = 800
+    displayHeight = 600 
+    graphicsBarOne = 0
 
-    #Width
-    file.write("800")
-    file.write("\n")
-    #Height
-    file.write("600")
-    file.write("\n")
-    #Graphics setting bar one
-    file.write("400")
-    file.write("\n")
-
-    file.close()
-
-def load():
+    save()
+#Saves the game
+def save():
     global displayWidth, displayHeight, graphicsBarOne
     
-    #Sets the height and width
-    with open("saveGame.txt") as f:
-        fileContent = f.readlines()
-            
-    displayWidth = int(fileContent[0])
-    displayHeight = int(fileContent[1])
-    graphicsBarOne = int(fileContent[2])
+    with open("savegame.txt", "wb") as f:
+        pickle.dump(displayWidth, f)
+        pickle.dump(displayHeight, f)
+        pickle.dump(graphicsBarOne, f)
+    
+#Loads the game
+def load():
+    global displayWidth, displayHeight, graphicsBarOne
 
+    with open("savegame.txt", "rb") as f:
+        displayWidth = pickle.load(f)
+        displayHeight = pickle.load(f)
+        graphicsBarOne = pickle.load(f)
 
+default()
+
+with open("savegame.txt", "rb") as f:
+    var1 = pickle.load(f)
+    var2 = pickle.load(f)
+    var3 = pickle.load(f)
+
+displayWidth = var1
+displayHeight = var2
+graphicsBarOne = var3

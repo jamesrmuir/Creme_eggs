@@ -56,6 +56,17 @@ def button(msg,x,y,w,h,ic,ac,textObjects,action=None):
 def testFunction():
     print("Test")
 
+#Used to change variables
+def minus():
+    global graphicsBarOne
+    if graphicsBarOne >= 10:
+        graphicsBarOne -= 10
+
+def plus():
+    global graphicsBarOne
+    if graphicsBarOne <= 390:
+        graphicsBarOne += 10
+
 #The main menu-----------------------------------------------------------------#
 def mainMenu():
     global menuLoop
@@ -67,6 +78,7 @@ def mainMenu():
         #Allows the player to quit
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
+                commonVariables.save()
                 pygame.quit()
                 quit()
 
@@ -85,14 +97,20 @@ def mainMenu():
         #Gets mouse position
         mouse = pygame.mouse.get_pos()
 
-        #Button One
+        #Buton Zero (Default)
+        button("Default",50,400,100,50,yellow,brightYellow,textObjectsGrey,commonVariables.default())
+
+        #Button One (Gamemode)
         button("Gamemode",150,450,100,50,yellow,brightYellow,textObjectsGrey,gamemode)
         
-        #Button Two
+        #Button Two (Graphics)
         button("Graphics",350,450,100,50,yellow,brightYellow,textObjectsGrey,graphics)
         
-        #Button Three    
+        #Button Three (Sound)
         button("Sound",550,450,100,50,yellow,brightYellow,textObjectsGrey,sound)
+        
+        #Button Four (Save)
+        button("Save",650,400,100,50,yellow,brightYellow,textObjectsGrey,commonVariables.save())    
 
         #IP Display
         button(userIp,700,550,100,50,grey,grey,textObjectsYellow,testFunction)
@@ -115,6 +133,7 @@ def gamemode():
         #Allows the player to quit
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
+                commonVariables.save()
                 pygame.quit()
                 quit()
 
@@ -133,25 +152,10 @@ def gamemode():
         
         #Gets mouse position
         mouse = pygame.mouse.get_pos()
-
-        #Minus button
-        button("-",50,250,100,50,yellow,brightYellow,textObjectsGrey,testFunction)
         
-        #Percentage display
-        button("",200,263,commonVariables.graphicsBarOne,25,yellow,yellow,textObjectsGrey,testFunction)        
-
-        #Plus button
-        button("+",650,250,100,50,yellow,brightYellow,textObjectsGrey,testFunction)
-        
-        #Button One
-        #button("Gamemode",150,450,100,50,yellow,brightYellow,textObjectsGrey,gamemode)
-        
-        #Button Two (Back)
+        #Button One (Back)
         button("Back",350,450,100,50,yellow,brightYellow,textObjectsGrey,mainMenu)
         
-        #Button Three    
-        #button("Sound",550,450,100,50,yellow,brightYellow,textObjectsGrey,testFunction)
-  
         #IP Display
         button(userIp,700,550,100,50,grey,grey,textObjectsYellow,testFunction)
 
@@ -173,6 +177,7 @@ def graphics():
         #Allows the player to quit
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
+                commonVariables.save()
                 pygame.quit()
                 quit()
 
@@ -193,23 +198,20 @@ def graphics():
         mouse = pygame.mouse.get_pos()
 
         #Minus button
-        button("-",50,250,100,50,yellow,brightYellow,textObjectsGrey,testFunction)
+        button("-",50,250,100,50,yellow,brightYellow,textObjectsGrey,minus)
         
         #Percentage display
-        button("",200,263,commonVariables.graphicsBarOne,25,yellow,yellow,textObjectsGrey,testFunction)        
+        button("",200,263,graphicsBarOne,25,yellow,yellow,textObjectsGrey,testFunction)        
 
         #Plus button
-        button("+",650,250,100,50,yellow,brightYellow,textObjectsGrey,testFunction)
+        button("+",650,250,100,50,yellow,brightYellow,textObjectsGrey,plus)
         
         #Button One
-        #button("Gamemode",150,450,100,50,yellow,brightYellow,textObjectsGrey,gamemode)
+        button("Save",650,400,100,50,yellow,brightYellow,textObjectsGrey,commonVariables.save())    
         
         #Button Two (Back)
         button("Back",350,450,100,50,yellow,brightYellow,textObjectsGrey,mainMenu)
         
-        #Button Three    
-        #button("Sound",550,450,100,50,yellow,brightYellow,textObjectsGrey,testFunction)
-  
         #IP Display
         button(userIp,700,550,100,50,grey,grey,textObjectsYellow,testFunction)
 
@@ -231,6 +233,7 @@ def sound():
         #Allows the player to quit
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
+                commonVariables.save()
                 pygame.quit()
                 quit()
 
@@ -243,7 +246,7 @@ def sound():
         smallText = pygame.font.Font("freesansbold.ttf",  20)
         
         #Displays title
-        TextSurf, TextRect = textObjectsYellow("Graphics menu", mediumText)
+        TextSurf, TextRect = textObjectsYellow("Sound menu", mediumText)
         TextRect.center = ((400),(85)) 
         gameDisplay.blit(TextSurf, TextRect)
         
@@ -282,6 +285,7 @@ def sound():
 #Program=======================================================================#
 #Loads variables---------------------------------------------------------------#
 commonVariables.load()
+graphicsBarOne  = commonVariables.graphicsBarOne
 
 #Initalise pygame--------------------------------------------------------------#
 pygame.init()
