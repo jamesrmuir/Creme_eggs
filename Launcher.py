@@ -4,6 +4,7 @@ __author__ = "James"
 import commonVariables
 import pygame
 import socket
+import pickle
 
 #Variables=====================================================================#
 #Defines colour
@@ -67,6 +68,16 @@ def plus():
     if graphicsBarOne <= 390:
         graphicsBarOne += 10
 
+def save():
+    global displayWidth, displayHeight, graphicsBarOne
+    
+    with open("savegame.txt", "wb") as f:
+        pickle.dump(displayWidth, f)
+        pickle.dump(displayHeight, f)
+        pickle.dump(graphicsBarOne, f)
+    
+
+#Start of main things==========================================================#
 #The main menu-----------------------------------------------------------------#
 def mainMenu():
     global menuLoop
@@ -98,7 +109,7 @@ def mainMenu():
         mouse = pygame.mouse.get_pos()
 
         #Buton Zero (Default)
-        button("Default",50,400,100,50,yellow,brightYellow,textObjectsGrey,commonVariables.default())
+        #button("Default",50,400,100,50,yellow,brightYellow,textObjectsGrey,commonVariables.default())
 
         #Button One (Gamemode)
         button("Gamemode",150,450,100,50,yellow,brightYellow,textObjectsGrey,gamemode)
@@ -110,7 +121,7 @@ def mainMenu():
         button("Sound",550,450,100,50,yellow,brightYellow,textObjectsGrey,sound)
         
         #Button Four (Save)
-        button("Save",650,400,100,50,yellow,brightYellow,textObjectsGrey,commonVariables.save())    
+        button("Save",650,400,100,50,yellow,brightYellow,textObjectsGrey,save())    
 
         #IP Display
         button(userIp,700,550,100,50,grey,grey,textObjectsYellow,testFunction)
@@ -207,7 +218,7 @@ def graphics():
         button("+",650,250,100,50,yellow,brightYellow,textObjectsGrey,plus)
         
         #Button One
-        button("Save",650,400,100,50,yellow,brightYellow,textObjectsGrey,commonVariables.save())    
+        button("Save",650,400,100,50,yellow,brightYellow,textObjectsGrey,save())    
         
         #Button Two (Back)
         button("Back",350,450,100,50,yellow,brightYellow,textObjectsGrey,mainMenu)
@@ -285,13 +296,15 @@ def sound():
 #Program=======================================================================#
 #Loads variables---------------------------------------------------------------#
 commonVariables.load()
+displayWidth = commonVariables.displayWidth
+displayHeight = commonVariables.displayHeight
 graphicsBarOne  = commonVariables.graphicsBarOne
 
 #Initalise pygame--------------------------------------------------------------#
 pygame.init()
 
-gameDisplay = pygame.display.set_mode((commonVariables.displayWidth
-                                       ,commonVariables.displayHeight))
+gameDisplay = pygame.display.set_mode((displayWidth
+                                       ,displayHeight))
 pygame.display.set_caption("Launcher")
 clock = pygame.time.Clock()
 

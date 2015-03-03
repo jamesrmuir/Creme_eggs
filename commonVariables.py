@@ -26,8 +26,6 @@ def load():
         displayHeight = pickle.load(f)
         graphicsBarOne = pickle.load(f)
 
-default()
-
 with open("savegame.txt", "rb") as f:
     var1 = pickle.load(f)
     var2 = pickle.load(f)
