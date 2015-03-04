@@ -17,7 +17,7 @@ lab1.pack()
 ent1 = Entry(mainWindow, fg = "green", bg = "light green", font=('times',20, 'bold'))
 ent1.pack()
 
-but1 = Button(mainWindow,text="Confirm", fg = "blue", bg = "light green", command=userNamePopUp, font=('times',15, 'bold'))
+but1 = Button(mainWindow,text="Confirm", fg = "light green", bg = "green", command=userNamePopUp, font=('times',15, 'bold'))
 but1.pack()
 
 mainloop()
