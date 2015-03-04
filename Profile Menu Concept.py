@@ -10,7 +10,6 @@ def userNamePopUp():
     messagebox.showinfo(title="Username changed",message="Your new username is "+userName)
 
 
-
 lab1 = Label(mainWindow, text="Create a new username:", fg = "blue", bg = "light green", font=('times',30, 'bold'))
 lab1.pack()
 
@@ -19,5 +18,10 @@ ent1.pack()
 
 but1 = Button(mainWindow,text="Confirm", fg = "light green", bg = "green", command=userNamePopUp, font=('times',15, 'bold'))
 but1.pack()
+
+profile = IntVar()
+
+c1 = Checkbutton(mainWindow, text="Private Profile", variable=profile, fg = "green" ,bg = "light green", font=('times', 15, 'bold'))
+c1.pack()
 
 mainloop()
