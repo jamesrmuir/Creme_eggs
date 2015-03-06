@@ -9,7 +9,7 @@ playerIp = socket.gethostbyname(socket.gethostname())
 
 def Start():
     messagebox.showinfo(title="Pi Thon Game",message="The game will now launch...")
-
+    import pyGameCountingTest
 def Profile():
     import ProfileMenuConcept
     messagebox.showinfo(title="Pi Thon Profile Settings",message="The Profile Options menu will now launch...")
