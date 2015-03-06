@@ -9,7 +9,10 @@ mainWindow.config(bg = "light green")
 def userNamePopUp():
     userName = ent1.get()
     messagebox.showinfo(title="Username changed",message="Your new username is "+userName)
-    quit()
+
+def close():
+    exit()
+    
 
 
 lab1 = Label(mainWindow, text="Create a new username:", fg = "blue", bg = "light green", font=('times',30, 'bold'))
@@ -20,6 +23,10 @@ ent1.pack()
 
 but1 = Button(mainWindow,text="Confirm", fg = "light green", bg = "green", command=userNamePopUp, font=('times',15, 'bold'))
 but1.pack()
+
+but2 = Button(mainWindow,text="Done", fg = "light green", bg = "green", command=close, font=('times',15, 'bold'))
+but2.pack()
+
 
 profile = IntVar()
 
