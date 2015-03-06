@@ -1,5 +1,6 @@
 from tkinter import *
 
+
 mainWindow = Tk()
 mainWindow.title("Pi Thon Profile Menu")
 mainWindow.maxsize(width=500,height=400)
@@ -8,6 +9,7 @@ mainWindow.config(bg = "light green")
 def userNamePopUp():
     userName = ent1.get()
     messagebox.showinfo(title="Username changed",message="Your new username is "+userName)
+    quit()
 
 
 lab1 = Label(mainWindow, text="Create a new username:", fg = "blue", bg = "light green", font=('times',30, 'bold'))

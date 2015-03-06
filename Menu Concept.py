@@ -11,6 +11,7 @@ def Start():
     messagebox.showinfo(title="Pi Thon Game",message="The game will now launch...")
 
 def Profile():
+    import ProfileMenuConcept
     messagebox.showinfo(title="Pi Thon Profile Settings",message="The Profile Options menu will now launch...")
 
 def Settings():
