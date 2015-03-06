@@ -2,7 +2,7 @@ from tkinter import *
 
 mainWindow = Tk()
 mainWindow.title("Pi Thon Profile Menu")
-mainWindow.minsize(width=400,height=400)
+mainWindow.maxsize(width=500,height=400)
 mainWindow.config(bg = "light green")
 
 def userNamePopUp():
